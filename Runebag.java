@@ -38,15 +38,15 @@ public class Runebag extends Item {
 				
 				Item rune = runeStack.getItem();
 				if (rune.itemID == Uwrunes.attuned_rune_item.itemID)
-				{
-					System.out.println(runeStack.getItemDamage());					
+				{					
 					phrase.append(Uwrunes.Rune.values()[runeStack.getItemDamage()].toString());
 					phrase.append(" ");
 				}
-				Uwrunes.spellcaster.cast(world, player, phrase.toString().trim());
+				
 			
-			}			
 			}
+			}
+			Uwrunes.spellcaster.cast(world, player, phrase.toString().trim());
 		}
 
 		return item;

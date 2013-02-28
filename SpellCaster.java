@@ -15,33 +15,31 @@ public class SpellCaster {
 	public SpellCaster() {
 		spellList.put("in bet mani", new SpellLesserHealing());
 		spellList.put("ort jux", new SpellMagicArrow());
+		spellList.put("flam por", new SpellFireball());
 		spellList.put("in mani ylem", new SpellCreateFood());
 		spellList.put("corp por", new SpellDeathBolt());
 	}
 
 	public void cast(World world, EntityPlayer source, String spellWords)
 	{
-		System.out.println("Invocation: " + spellWords + " by " + source.toString());
 		if (spellList.containsKey(spellWords))
 		{
-			System.out.println("Success!");
 			GenericSpell spell = spellList.get(spellWords);
 			PlayerMagicStats sourceStats = Uwrunes.tracker.getStatsForPlayer(source);
-			System.out.println(sourceStats.getMana() + " of " + sourceStats.getMaxMana());
 			int cost = spell.getCircle() * 2;
 			if (sourceStats.hasMana(cost))
 			{		
 				
 				if (!world.isRemote)
 				{
-					
+					// SERVER SIDE
 					sourceStats.subtractMana(cost);
 					Uwrunes.tracker.transmitManaUpdate(source, sourceStats);
-					System.out.println("Server says they have " + sourceStats.getMana() + " left");
+					source.addChatMessage(source.getEntityName() + "invokes " + spellWords.toUpperCase());
 				}
 				else
 				{
-					System.out.println("Client says they have " + sourceStats.getMana() + " left");
+					// CLIENT SIDE
 					
 				}
 				spell.doCast(world, source);		

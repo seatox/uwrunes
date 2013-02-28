@@ -6,7 +6,8 @@ import net.minecraft.world.World;
 public class SpellLesserHealing implements GenericSpell {
 
 	public SpellLesserHealing() {
-		// TODO Auto-generated constructor stub
+		// IN BET MANI - Lesser healing, heals a single heart.
+		// TODO: Evaluate balance between IBM and the food from IMY
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public class SpellCreateFood implements GenericSpell {
 	Item[] foods = {Item.appleRed, Item.potato, Item.fishRaw, Item.bread, Item.carrot, Item.beefRaw, Item.chickenRaw};
 	
 	public SpellCreateFood() {
-		// TODO Auto-generated constructor stub
+		// IN MANI YLEM - create food.  Might be game breaking in minecraft, but it's a classic.
 	}
 
 	@Override

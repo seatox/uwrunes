@@ -11,7 +11,8 @@ import net.minecraft.world.World;
 public class SpellFireball implements GenericSpell {
 
 	public SpellFireball() {
-	
+		// FLAM POR - Fireball.
+		// TODO:  Make it not a terrible-minecraft fireball.
 	}
 
 	@Override

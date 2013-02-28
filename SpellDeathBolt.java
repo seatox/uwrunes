@@ -6,7 +6,9 @@ import net.minecraft.world.World;
 public class SpellDeathBolt implements GenericSpell {
 
 	public SpellDeathBolt() {
-		// TODO Auto-generated constructor stub
+		// CORP POR - Death Bolt, Energy Bolt, whatever - this spell will do
+		// massive damage to whatever it hits, enough to kill most mundane foes.
+		// TODO: Make this a thing
 	}
 
 	@Override

@@ -12,7 +12,8 @@ import net.minecraft.world.World;
 public class SpellMagicArrow implements GenericSpell {
 
 	public SpellMagicArrow() {
-	
+		// ORT JUX - Magic arrow - slings an arrow at a target.
+		// TODO: Make the arrow a not-permanent one, maybe implement a whole new projectile.
 	}
 
 	@Override
