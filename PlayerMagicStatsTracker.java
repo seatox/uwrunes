@@ -9,6 +9,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -45,7 +46,7 @@ public class PlayerMagicStatsTracker implements IPlayerTracker, IScheduledTickHa
 
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		//System.out.println("Mana Regeneration Tick");
+		//Mana regeneration tick - SERVER SIDE ONLY
 		for (EntityPlayer p: stats.keySet())
 		{
 			PlayerMagicStats pms = stats.get(p);
@@ -58,7 +59,7 @@ public class PlayerMagicStatsTracker implements IPlayerTracker, IScheduledTickHa
 	
 	public void transmitManaUpdate(EntityPlayer player, PlayerMagicStats stats)
 	{
-		//System.out.println("Transmitting mana update");
+		//transmit mana changes to a client - SEVER SIDE ONLY
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(baos);
 		try {
@@ -94,28 +95,39 @@ public class PlayerMagicStatsTracker implements IPlayerTracker, IScheduledTickHa
 
 	@Override
 	public void onPlayerLogin(EntityPlayer player) {
-			stats.put(player, new PlayerMagicStats());
+			// Player logged in, read their NBT for stats.
+			NBTTagCompound savedata = player.getEntityData();
+			PlayerMagicStats playerstats = new PlayerMagicStats();
+			playerstats.readFromNBT(savedata);
+			stats.put(player, playerstats);
 			transmitManaUpdate(player, stats.get(player));
 	}
 
 	@Override
 	public void onPlayerLogout(EntityPlayer player) {
+			// Player logged out, add their stats to NBT and remove from stats.
+			
+			NBTTagCompound savedata = player.getEntityData();
+			PlayerMagicStats playerstats = stats.get(player);
+			playerstats.writeToNBT(savedata);			
 			stats.remove(player);
 	}
 
 	@Override
 	public void onPlayerChangedDimension(EntityPlayer player) {
-
+		// Nothing happening here yet.
 	}
 
 	@Override
 	public void onPlayerRespawn(EntityPlayer player) {
+		// You die, you lose all your magic juice.
 		PlayerMagicStats playerstats = stats.get(player);
 		playerstats.setMana(0);
 	}
 
 	public void updatePlayer(EntityPlayer player, int mana, int maxmana,
 			int circle) {
+		// Generally called on a client on receipt of an update packet.
 		PlayerMagicStats playerstats = stats.get(player);
 		if (stats != null)
 		{
@@ -131,13 +143,9 @@ public class PlayerMagicStatsTracker implements IPlayerTracker, IScheduledTickHa
 
 	@Override
 	public int nextTickSpacing() {
-
+		// Time between mana ticks
+		// TODO: make this configurable via forge config
 		return 20;
 	}
 	
-	public void save() {
-		
-		
-	}
-
 }

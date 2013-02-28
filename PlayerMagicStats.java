@@ -28,6 +28,8 @@ public class PlayerMagicStats {
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		int[] stats;
+		if (nbt.hasKey("uwRuneStats"))
+		{
 		stats = nbt.getIntArray("uwRuneStats");
 		if (stats != null)
 		{
@@ -35,8 +37,12 @@ public class PlayerMagicStats {
 			maxMana = stats[1];
 			circle = stats[2];
 		}
+		}
 		runebag = new InventoryRunebag();
-		runebag.loadInventoryFromNBT(nbt.getTagList("Runebag"));
+		if (nbt.hasKey("Runebag"))
+		{
+			runebag.loadInventoryFromNBT(nbt.getTagList("Runebag"));
+		}
 	}
 	
 	public PlayerMagicStats(int mana, int maxMana, int circle) {
