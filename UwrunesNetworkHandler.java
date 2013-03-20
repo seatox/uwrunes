@@ -17,42 +17,50 @@ public class UwrunesNetworkHandler implements IPacketHandler {
 	public UwrunesNetworkHandler() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
-		
-		if (packet.channel.equals("UWRunePlayer"))
+
+		EntityPlayer p = (EntityPlayer) player;
+
+		if (packet.channel.equals("UWRunePlayer") && p.worldObj.isRemote)
 		{
-			if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
-			{
-				int mana = 0;
-				int maxmana = 0;
-				int circle = 0;
-				DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
-				try {
-					mana = dis.readInt();
-					maxmana = dis.readInt();
-					circle = dis.readInt();
-				}
-				catch (IOException e)
-				{
-					e.printStackTrace();
-					return;
-				}
-				Uwrunes.tracker.updatePlayer((EntityPlayer)player, mana, maxmana, circle);			
-			
+			int mana = 0;
+			int maxmana = 0;
+			int circle = 0;
+			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
+			try {
+				mana = dis.readInt();
+				maxmana = dis.readInt();
+				circle = dis.readInt();
 			}
-		}
-		if (packet.channel.equals("UWRuneSpell"))
-		{
-			if (FMLCommonHandler.instance().getSide() == Side.SERVER)
+			catch (IOException e)
 			{
-				
+				e.printStackTrace();
+				return;
+			}
+			Uwrunes.tracker.updatePlayer((EntityPlayer)player, mana, maxmana, circle);			
+
+		}
+
+		if (packet.channel.equals("UWRuneCrafting") && !p.worldObj.isRemote)
+		{
+			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
+			try {
+				String mantra = dis.readUTF();
+				if (p.openContainer != null)
+					if (p.openContainer instanceof ContainerAnkh)
+					{
+						((ContainerAnkh) p.openContainer).tryInvoke(mantra);
+					}					
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+				return;
 			}
 		}
 	}
-
-	
-	
 }
+

@@ -25,7 +25,7 @@ import net.minecraft.item.*;
 import net.minecraft.block.*;
 
 @Mod(modid="Uwrunes", name="Ultima Underworld Runes", version="0.0.1")
-@NetworkMod(clientSideRequired=true, serverSideRequired=false, channels=("UWRunePlayer"), packetHandler=UwrunesNetworkHandler.class)
+@NetworkMod(clientSideRequired=true, serverSideRequired=false, channels={"UWRunePlayer","UWRuneCrafting"}, packetHandler=UwrunesNetworkHandler.class)
 public class Uwrunes {
 	public static Configuration config;
 	public static PlayerMagicStatsTracker tracker;
@@ -37,7 +37,7 @@ public class Uwrunes {
 		uus, vas, wis, xen, ylem, zu }
 
 	//Item IDs
-	public static Map<Rune, Integer> runeIds = new HashMap<Rune, Integer>();
+
 	public static Item blank_rune_item;
 	public static Item attuned_rune_item;
 	public static Item runebag_item;
@@ -49,7 +49,7 @@ public class Uwrunes {
 	public static int runebag_texture_id = 27;
 	//Block IDs
 	public static int ankh_block_id;
-
+	public static Block ankh_block;
 	// Forge Instance Setup
 	@Instance("Uwrunes")
 	public static Uwrunes instance;
@@ -74,6 +74,7 @@ public class Uwrunes {
 	@Init
 	public void load(FMLInitializationEvent event) {
 		initItems();
+		initBlocks();
 		initRecipies();
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		proxy.registerTickers();
@@ -116,9 +117,17 @@ public class Uwrunes {
 		.setCreativeTab(CreativeTabs.tabTools)
 		.setIconIndex(runebag_texture_id);               					
 
-		GameRegistry.registerItem(runebag_item, "RuneBag");
+		GameRegistry.registerItem(runebag_item, "UWRunesRuneBag");
 		LanguageRegistry.addName(runebag_item, "Rune Bag");
 
+	}
+	
+	protected void initBlocks()
+	{
+		ankh_block = new AnkhBlock(ankh_block_id);
+		GameRegistry.registerBlock(ankh_block, "UWRunesAnkh");
+		LanguageRegistry.addName(ankh_block, "Ankh");
+		GameRegistry.registerTileEntity(TileEntityAnkh.class, "UWRunesAnkhTileEntity");
 	}
 	
 	protected void initRecipies()
@@ -129,9 +138,11 @@ public class Uwrunes {
 		ItemStack stringItem = new ItemStack(Item.silk);
 		ItemStack runebagItem = new ItemStack(Uwrunes.runebag_item);
 		ItemStack blankruneItem = new ItemStack(Uwrunes.blank_rune_item);
+		ItemStack ankhBlocks = new ItemStack(Uwrunes.ankh_block);
 		
 		GameRegistry.addRecipe(blankruneItem, " x ", "xyx", " x ", 'x', stoneBlock, 'y', goldnuggetItem);
 		GameRegistry.addRecipe(runebagItem, "xxx", "yzy", "yyy", 'x', stringItem, 'y', woolBlock, 'z', blankruneItem);
+		GameRegistry.addRecipe(ankhBlocks, " x ", "xyx", " x ", 'x', goldnuggetItem, 'y', blankruneItem );
 	
 	}
 }

@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 
 public class CommonProxy {
 	public static String ITEMS_PNG = "/seatox/minecraft/uwrunes/itemtexture.png";
-	
+	public static String BLOCK_PNG = "/seatox/minecraft/uwrunes/blocktexture.png";
 	
 	public void registerRenderers()
 	{

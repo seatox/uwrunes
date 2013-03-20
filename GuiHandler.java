@@ -1,9 +1,11 @@
 package seatox.minecraft.uwrunes;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import seatox.minecraft.uwrunes.ContainerRunebag;
+import seatox.minecraft.uwrunes.client.GuiAnkh;
 import seatox.minecraft.uwrunes.client.GuiRunebag;
 
 public class GuiHandler implements IGuiHandler {
@@ -21,6 +23,16 @@ public class GuiHandler implements IGuiHandler {
 		switch (ID) {
 		case 1:
 				return new ContainerRunebag(player.inventory, stats.getRunebag());
+		case 2:
+				TileEntity t = world.getBlockTileEntity(x, y, z);
+				if (t instanceof TileEntityAnkh)
+				{
+					return new ContainerAnkh(player.inventory, (TileEntityAnkh)t);
+				}
+				else
+				{
+					return null;
+				}
 		default:
 				return null;
 		}
@@ -35,6 +47,16 @@ public class GuiHandler implements IGuiHandler {
 		switch (ID) {
 		case 1:
 				return new GuiRunebag(player.inventory, new InventoryRunebag(), "Runebag");
+		case 2:
+			TileEntity t = world.getBlockTileEntity(x, y, z);
+			if (t instanceof TileEntityAnkh)
+			{
+				return new GuiAnkh(player.inventory, (TileEntityAnkh)t);
+			}
+			else
+			{
+				return null;
+			}
 		default:
 				return null;
 		}
