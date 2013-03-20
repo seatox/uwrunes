@@ -21,7 +21,7 @@ public class SpellMagicArrow implements GenericSpell {
 	public void doCast(World currentWorld, EntityPlayer caster) {
 		if (!currentWorld.isRemote)
 		{
-			EntityMagicArrow arrow = new EntityMagicArrow(currentWorld, caster, 20);
+			EntityMagicArrow arrow = new EntityMagicArrow(currentWorld, caster, 1);
 			
 			currentWorld.spawnEntityInWorld(arrow);
 		}			
@@ -30,6 +30,11 @@ public class SpellMagicArrow implements GenericSpell {
 	public int getCircle()
 	{
 		return 1;
+	}
+	
+	public String toString()
+	{
+		return "Magic Arrow";
 	}
 
 }

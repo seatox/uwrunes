@@ -28,5 +28,10 @@ public class SpellCreateFood implements GenericSpell {
 	public int getCircle() {
 		return 1;
 	}
+	
+	public String toString()
+	{
+		return "Create Food";
+	}
 
 }

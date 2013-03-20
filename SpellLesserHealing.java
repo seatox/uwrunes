@@ -19,4 +19,9 @@ public class SpellLesserHealing implements GenericSpell {
 	{
 		return 1;
 	}
+	
+	public String toString()
+	{
+		return "Lesser Healing";
+	}
 }

@@ -30,4 +30,8 @@ public class SpellFireball implements GenericSpell {
 		return 3;
 	}
 
+	public String toString()
+	{
+		return "Fireball";
+	}
 }
