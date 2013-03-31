@@ -13,11 +13,15 @@ public class SpellCaster {
 	Hashtable<String, GenericSpell> spellList = new Hashtable<String, GenericSpell>();
 	
 	public SpellCaster() {
-		spellList.put("in bet mani", new SpellLesserHealing());
-		spellList.put("ort jux", new SpellMagicArrow());
+		spellList.put("in bet mani", new SpellLesserHealing("Lesser Healing", 2, 1, true));
+		spellList.put("ort jux", new SpellMagicArrow("Magic Arrow", 2, 1, true));
 		spellList.put("flam por", new SpellFireball());
-		spellList.put("in mani ylem", new SpellCreateFood());
+		spellList.put("in mani ylem", new SpellCreateFood("Create Food", 2, 1, true));
 		spellList.put("corp por", new SpellDeathBolt());
+		spellList.put("an nox", new SpellCure("Cure Poison", 4, 2, true));
+		spellList.put("kal lor", new SpellEscape("HELP", 2, 1, true));
+		spellList.put("wis lor", new SpellNightvision("Nightvision", 2, 1, true));
+		
 	}
 
 	public void cast(World world, EntityPlayer source, String spellWords)
@@ -26,32 +30,40 @@ public class SpellCaster {
 		{
 			GenericSpell spell = spellList.get(spellWords);
 			PlayerMagicStats sourceStats = Uwrunes.tracker.getStatsForPlayer(source);
-			int cost = spell.getCircle() * 2;
-			if (sourceStats.hasMana(cost))
-			{		
-				
-				if (!world.isRemote)
-				{
-					// SERVER SIDE
-					sourceStats.subtractMana(cost);
-					Uwrunes.tracker.transmitManaUpdate(source, sourceStats);
-					source.addChatMessage(source.getEntityName() + "invokes " + spellWords.toUpperCase());
+			if (sourceStats != null)
+			{
+				int cost = spell.getCost();
+				int circle = spell.getCircle();			
+				if (sourceStats.hasMana(cost) && sourceStats.getCircle() >= circle)
+				{		
+					
+					if (!world.isRemote)
+					{
+						// SERVER SIDE
+						sourceStats.subtractMana(cost);
+						Uwrunes.tracker.transmitManaUpdate(source, sourceStats);
+						source.addChatMessage(source.getEntityName() + "invokes " + spellWords.toUpperCase());
+					}
+					else
+					{
+						// CLIENT SIDE
+						source.addChatMessage("You invoke " + spell.getName());
+					}
+					spell.doCast(world, source);		
 				}
 				else
 				{
-					// CLIENT SIDE
-					
+					// Not enough mana, or not high enough circle.
+					return;
 				}
-				spell.doCast(world, source);		
+			
 			}
-			
-			
-		}
 		else
 		{
-			//do more failure stuff here
+			// Something has gone wrong, there is no stats data, so bail.
 			return;
 		}
 	}
 	
+	}
 }

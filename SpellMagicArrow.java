@@ -9,11 +9,10 @@ import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class SpellMagicArrow implements GenericSpell {
+public class SpellMagicArrow extends GenericSpell {
 
-	public SpellMagicArrow() {
-		// ORT JUX - Magic arrow - slings an arrow at a target.
-		// TODO: Make the arrow a not-permanent one, maybe implement a whole new projectile.
+	public SpellMagicArrow(String string, int i, int j, boolean b) {
+		super (string, i, j, b);
 	}
 
 	@Override
@@ -27,14 +26,4 @@ public class SpellMagicArrow implements GenericSpell {
 		}			
 	}
 	
-	public int getCircle()
-	{
-		return 1;
-	}
-	
-	public String toString()
-	{
-		return "Magic Arrow";
-	}
-
 }

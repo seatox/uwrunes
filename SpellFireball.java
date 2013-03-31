@@ -8,12 +8,8 @@ import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class SpellFireball implements GenericSpell {
+public class SpellFireball extends GenericSpell {
 
-	public SpellFireball() {
-		// FLAM POR - Fireball.
-		// TODO:  Make it not a terrible-minecraft fireball.
-	}
 
 	@Override
 
@@ -30,8 +26,9 @@ public class SpellFireball implements GenericSpell {
 		return 3;
 	}
 
-	public String toString()
+	public int getCost()
 	{
-		return "Fireball";
+		return 6;
 	}
+	
 }

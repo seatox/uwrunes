@@ -7,18 +7,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class AnkhBlock extends BlockContainer {
+public class BlockAnkh extends BlockContainer {
 
-	public AnkhBlock(int id) {
-		super(id, 0, Material.rock);
-		this.setBlockName("Ankh");
+	public BlockAnkh(int id) {
+		super(id, Material.rock);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
-	}
-	
-	@Override
-	public String getTextureFile ()
-	{
-		return CommonProxy.BLOCK_PNG;
 	}
 
 	@Override

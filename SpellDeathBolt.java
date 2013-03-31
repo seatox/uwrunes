@@ -1,24 +1,22 @@
 package seatox.minecraft.uwrunes;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class SpellDeathBolt implements GenericSpell {
+public class SpellDeathBolt extends GenericSpell {
 
-	public SpellDeathBolt() {
-		// CORP POR - Death Bolt, Energy Bolt, whatever - this spell will do
-		// massive damage to whatever it hits, enough to kill most mundane foes.
-		// TODO: Make this a thing
-	}
 
 	@Override
+	@SideOnly(Side.SERVER)
 	public void doCast(World currentWorld, EntityPlayer caster) {
-		if (!currentWorld.isRemote)
-		{
-		}
-
+		
+		
+		
 	}
 
 	@Override
@@ -26,9 +24,9 @@ public class SpellDeathBolt implements GenericSpell {
 		return 7;
 	}
 	
-	public String toString()
+	public int getCost()
 	{
-		return "Death Bolt";
+		return 14;
 	}
-
+	
 }

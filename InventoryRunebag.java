@@ -9,10 +9,9 @@ import net.minecraft.nbt.*;
 public class InventoryRunebag extends InventoryBasic {
 
 	// 1 slot for each rune
-	private ItemStack[] runes;
 
 	public InventoryRunebag() {
-		super("Runes", 30);
+		super("Runes", false, 30);
 	
 	}
 

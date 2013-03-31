@@ -7,31 +7,23 @@ import net.minecraft.world.World;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class SpellCreateFood implements GenericSpell {
+public class SpellCreateFood extends GenericSpell {
 
-	Item[] foods = {Item.appleRed, Item.potato, Item.fishRaw, Item.bread, Item.carrot, Item.beefRaw, Item.chickenRaw};
 	
-	public SpellCreateFood() {
-		// IN MANI YLEM - create food.  Might be game breaking in minecraft, but it's a classic.
+	
+	Item[] foods = {Item.appleRed, Item.potato, Item.fishRaw, 
+					Item.bread, Item.carrot, Item.beefRaw, Item.chickenRaw};
+
+	public SpellCreateFood(String string, int i, int j, boolean b) {
+		super (string, i, j, b);
 	}
 
-	@Override
 	public void doCast(World currentWorld, EntityPlayer caster) {
 		Item pick = foods[new Random().nextInt(foods.length)];
 		if (!currentWorld.isRemote)
 		{
 			caster.dropItem(pick.itemID, 1);
 		}
-	}
-
-	@Override
-	public int getCircle() {
-		return 1;
-	}
-	
-	public String toString()
-	{
-		return "Create Food";
 	}
 
 }

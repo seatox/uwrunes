@@ -15,6 +15,7 @@ public class PlayerMagicStats {
 	{
 		initRunebag();
 		setMana(0);
+		setMaxMana(10);
 		setCircle(1);			
 	}
 	

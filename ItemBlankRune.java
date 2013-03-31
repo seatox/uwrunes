@@ -2,9 +2,9 @@ package seatox.minecraft.uwrunes;
 
 import net.minecraft.item.Item;
 
-public class BlankRune extends Item {
+public class ItemBlankRune extends Item {
 
-	public BlankRune(int id) {
+	public ItemBlankRune(int id) {
 		super(id);		
 	}
 

@@ -68,6 +68,8 @@ public class Uwrunes {
 		runebag_item_id = config.getItem("runebag", 4002, "The runebag").getInt();              
 		ankh_block_id = config.getBlock("ankh block", 4000, "Ankh for attuning runestones").getInt();
 
+		
+		
 		config.save();               
 	}
 
@@ -89,19 +91,18 @@ public class Uwrunes {
 	protected void initItems()
 	{
 		//Blank rune
-		blank_rune_item = new BlankRune(blank_rune_item_id)
+		blank_rune_item = new ItemBlankRune(blank_rune_item_id)
 		.setMaxStackSize(64)
-		.setItemName("BlankRune")
-		.setIconIndex(blank_rune_texture_id)
+		.setUnlocalizedName("Uwrunes:ItemBlankRune")
 		.setCreativeTab(CreativeTabs.tabMisc);
 
-		GameRegistry.registerItem(blank_rune_item,"BlankRune");
+		GameRegistry.registerItem(blank_rune_item,"ItemBlankRune");
 		LanguageRegistry.addName(blank_rune_item, "Blank Rune");
 
 		
 		// Attuned runes
-		attuned_rune_item = new AttunedRune(attuned_rune_item_id);            	   				    	   				 
-		GameRegistry.registerItem(attuned_rune_item,"AttunedRune");
+		attuned_rune_item = new ItemAttunedRune(attuned_rune_item_id);            	   				    	   				 
+		GameRegistry.registerItem(attuned_rune_item,"ItemAttunedRune");
 
 		// Register names for each rune
 		for (int i = 0; i < Rune.values().length; i++)
@@ -111,21 +112,20 @@ public class Uwrunes {
 		}
 
 		// Runebag
-		runebag_item = new Runebag(runebag_item_id)
+		runebag_item = new ItemRunebag(runebag_item_id)
 		.setMaxStackSize(1)
-		.setItemName("RuneBag")
-		.setCreativeTab(CreativeTabs.tabTools)
-		.setIconIndex(runebag_texture_id);               					
-
-		GameRegistry.registerItem(runebag_item, "UWRunesRuneBag");
+		.setUnlocalizedName("Uwrunes:ItemRunebag")
+		.setCreativeTab(CreativeTabs.tabTools);
+	
+		GameRegistry.registerItem(runebag_item, "ItemRunebag");
 		LanguageRegistry.addName(runebag_item, "Rune Bag");
 
 	}
 	
 	protected void initBlocks()
 	{
-		ankh_block = new AnkhBlock(ankh_block_id);
-		GameRegistry.registerBlock(ankh_block, "UWRunesAnkh");
+		ankh_block = new BlockAnkh(ankh_block_id).setUnlocalizedName("Uwrunes:BlockAnkh");
+		GameRegistry.registerBlock(ankh_block, "BlockAnkh");
 		LanguageRegistry.addName(ankh_block, "Ankh");
 		GameRegistry.registerTileEntity(TileEntityAnkh.class, "UWRunesAnkhTileEntity");
 	}

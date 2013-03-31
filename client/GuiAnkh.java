@@ -7,6 +7,8 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import seatox.minecraft.uwrunes.ContainerAnkh;
 import seatox.minecraft.uwrunes.TileEntityAnkh;
@@ -17,6 +19,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.StatCollector;
 
+@SideOnly(Side.CLIENT)
 public class GuiAnkh extends GuiContainer {
 
 	protected String mantra = "";
@@ -77,16 +80,12 @@ public class GuiAnkh extends GuiContainer {
 	}
 	
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float var1, int var2,
-			int var3) {
-		int texture = mc.renderEngine.getTexture("/seatox/minecraft/uwrunes/client/ankhui.png");
-		this.mc.renderEngine.bindTexture(texture);
+	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
+		this.mc.renderEngine.bindTexture("/mods/UWrunes/textures/gui/GuiAnkh.png");
 		GL11.glColor4f(1.0F,  1.0F,  1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(texture);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
-		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-
+		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);		
 	}
 	
 	@Override

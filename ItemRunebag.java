@@ -6,9 +6,9 @@ import net.minecraft.item.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.world.World;
 
-public class Runebag extends Item {
+public class ItemRunebag extends Item {
 
-	public Runebag(int id) {
+	public ItemRunebag(int id) {
 		super(id);
 	}
 
@@ -24,8 +24,7 @@ public class Runebag extends Item {
 		InventoryRunebag bag = casterState.getRunebag();
 		if (player.isSneaking())
 		{
-			player.openGui(Uwrunes.instance, 1, world, 0, 0, 0);
-			
+			player.openGui(Uwrunes.instance, 1, world, player.chunkCoordX, player.chunkCoordY, player.chunkCoordZ);			
 		}
 		else
 		{
