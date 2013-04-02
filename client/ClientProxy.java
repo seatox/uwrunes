@@ -16,6 +16,7 @@ public class ClientProxy extends CommonProxy{
 	Uwrunes.tracker = new PlayerMagicStatsTracker();
 	Uwrunes.spellcaster = new ClientSpellcaster();
 	TickRegistry.registerScheduledTickHandler(Uwrunes.tracker, Side.SERVER);
+	TickRegistry.registerTickHandler(new HudRunebag(), Side.CLIENT);
 	GameRegistry.registerPlayerTracker(Uwrunes.tracker);
 	}
 	

@@ -8,6 +8,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import seatox.minecraft.uwrunes.ContainerRunebag;
 import seatox.minecraft.uwrunes.InventoryRunebag;
+import seatox.minecraft.uwrunes.PlayerMagicStats;
+import seatox.minecraft.uwrunes.Uwrunes;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -23,7 +25,7 @@ public class GuiRunebag extends GuiContainer {
 	
 	private IInventory runebag;
 	private IInventory player;
-	
+	private PlayerMagicStats stats;
 	
 	public String name;
 	
@@ -32,6 +34,7 @@ public class GuiRunebag extends GuiContainer {
 		this.runebag = runebag;
 		this.player = player;
 		player.player.openContainer = this.inventorySlots;
+		stats = Uwrunes.tracker.getStatsForPlayer(player.player);
 		this.allowUserInput = false;
 		this.name = name;
 		this.xSize = 176;
@@ -50,8 +53,9 @@ public class GuiRunebag extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		fontRenderer.drawString(name, 8, -5, 4210752);
-		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, 100, 4210752);
+		fontRenderer.drawString(name, 8, 6, 4210752);
+		fontRenderer.drawString("Mana:"+ stats.getMana() + "/" + stats.getMaxMana(), 8, 16, 4210752);		
+		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, 130, 4210752);
 	}
 	
 	@Override
