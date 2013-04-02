@@ -1,5 +1,7 @@
 package seatox.minecraft.uwrunes;
 
+import javax.swing.text.html.parser.Entity;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityLiving;
@@ -14,7 +16,6 @@ public class SpellDeathBolt extends GenericSpell {
 	@Override
 	@SideOnly(Side.SERVER)
 	public void doCast(World currentWorld, EntityPlayer caster) {
-		
 		
 		
 	}

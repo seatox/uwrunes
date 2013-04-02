@@ -3,6 +3,7 @@ package seatox.minecraft.uwrunes;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.item.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.*;
 import net.minecraft.world.World;
 
@@ -14,6 +15,21 @@ public class ItemRunebag extends Item {
 
 	public String getTextureFile() {
 		return CommonProxy.ITEMS_PNG;
+	}
+	
+	
+	
+	@Override
+	public void onUpdate(ItemStack itemStack, World world,
+			Entity holder, int par4, boolean held) {
+		
+		if ((holder instanceof EntityPlayer) && held && world.isRemote)
+		{
+			EntityPlayer player = (EntityPlayer)holder;
+			
+			
+		}
+	
 	}
 	
 	@Override

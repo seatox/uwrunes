@@ -12,7 +12,8 @@ public class SpellCaster {
 
 	Hashtable<String, GenericSpell> spellList = new Hashtable<String, GenericSpell>();
 	
-	public SpellCaster() {
+	public SpellCaster() {		
+		//TODO: Make this pull from a config file.
 		spellList.put("in bet mani", new SpellLesserHealing("Lesser Healing", 2, 1, true));
 		spellList.put("ort jux", new SpellMagicArrow("Magic Arrow", 2, 1, true));
 		spellList.put("flam por", new SpellFireball());
@@ -21,7 +22,9 @@ public class SpellCaster {
 		spellList.put("an nox", new SpellCure("Cure Poison", 4, 2, true));
 		spellList.put("kal lor", new SpellEscape("HELP", 2, 1, true));
 		spellList.put("wis lor", new SpellNightvision("Nightvision", 2, 1, true));
-		
+		spellList.put("an mani", new SpellHarm("Harm", 2, 1, true));
+		spellList.put("an xen corp", new SpellSmiteUndead("Smite Undead", 2, 1, true));
+		spellList.put("flam sanct", new SpellProtectionFromFire("Protection from Fire", 2, 1, true));
 	}
 
 	public void cast(World world, EntityPlayer source, String spellWords)

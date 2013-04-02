@@ -133,11 +133,6 @@ public class PlayerMagicStatsTracker implements IPlayerTracker, IScheduledTickHa
 		{
 			playerstats.setMaxMana(maxmana);
 			playerstats.setCircle(circle);
-			
-			if (mana < playerstats.getMaxMana())
-			{
-				player.sendChatToPlayer("Mana " + mana + "/" + maxmana);
-			}
 			playerstats.setMana(mana);
 		}
 		else
