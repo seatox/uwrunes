@@ -1,4 +1,6 @@
 uwrunes
 =======
 
-See readme.txt for current mod status.
+A small mod for Minecraft to implement Ultima Underworld style mana+runebag spellcasting.
+
+See README.txt for mod usage instructions.
